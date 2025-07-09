@@ -294,7 +294,7 @@
   submitted_answers: JSON.stringify(answers, null, 2)
 };
 
-      emailjs.send($1)
+      emailjs.send("service_vwr5l2a", "template_g7kolp4", payload)
         .then(() => alert("✅ Your quiz was submitted and emailed successfully."))
         .catch(err => {
           console.error("❌ Email send error:", err);
