@@ -285,7 +285,7 @@
 
       alert(`Thank you, ${name}. Your score is ${score}/${questions.length}`);
 
-       const payload = {
+      const payload = {
   candidate_name: name,
   candidate_email: email,
   candidate_phone: phone,
@@ -294,10 +294,14 @@
   submitted_answers: JSON.stringify(answers, null, 2)
 };
 
-      emailjs.send("service_vwr5l2a", "template_g7kolp4", payload)
-        .then(() => console.log("Email sent successfully"))
-        .catch(err => console.error("Email send error:", err));
+      emailjs.send($1)
+        .then(() => alert("✅ Your quiz was submitted and emailed successfully."))
+        .catch(err => {
+          console.error("❌ Email send error:", err);
+          alert("⚠️ Your quiz was recorded, but the email did not send. Please notify your supervisor.");
+        });
     });
   </script>
 </body>
 </html>
+
