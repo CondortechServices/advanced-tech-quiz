@@ -42,7 +42,262 @@
   </form>
 
   <script>
-    // JavaScript from the canvas HTML will be inserted here
+    emailjs.init("Wjk8d6ZaoJAS2Phr9");
+
+    const questions = [
+  {
+    id: 1,
+    q: "You're wiring inputs and readers to a Mercury MP1502 controller. Which surge protection voltages are recommended?",
+    options: ["Reader data lines – 5V", "Output relays – 12V", "Input circuits – 12V", "RS-485 – ±7V", "Reader power – as required", "PoE – 60V"],
+    answer: [0, 2, 3, 4, 5],
+    multi: true
+  },
+  {
+    id: 2,
+    q: "A user is granted access. You see a valid credential event, but the door does not unlock. What's the next step?",
+    options: ["Replace the reader", "Check the door position switch", "Measure voltage at the lock terminal on the MR52", "Reboot the controller"],
+    answer: [2],
+    multi: false
+  },
+  {
+    id: 3,
+    q: "According to the MP1502 installation guide, what is the maximum recommended current draw across both reader ports?",
+    options: ["100 mA", "200 mA", "300 mA", "400 mA"],
+    answer: [2],
+    multi: false
+  },
+  {
+    id: 4,
+    q: "You're wiring a maglock to relay 1. The lock needs to fail-safe. Which relay contact should you use?",
+    options: ["NO and COM", "NC and COM", "Trigger and GND", "Reset and NC"],
+    answer: [1],
+    multi: false
+  },
+  {
+    id: 5,
+    q: "You connect a Wiegand reader to a Mercury controller without surge protection. What is the likely result of a nearby power surge?",
+    options: ["Door opens permanently", "Reader fails to beep", "Controller LED turns orange", "Damage to the reader's data circuit or controller input"],
+    answer: [3],
+    multi: false
+  },
+  {
+    id: 6,
+    q: "When installing a 12VDC access control power supply with backup batteries, when should charging be enabled?",
+    options: ["When the main input voltage exceeds 24V", "When sealed lead-acid batteries are connected", "When the load exceeds 50%", "When using a maglock"],
+    answer: [1],
+    multi: false
+  },
+  {
+    id: 7,
+    q: "You're installing a wireless door controller and the reader drops intermittently. What should you check first?",
+    options: ["Reader baud rate", "Wi-Fi SSID password", "Distance and signal interference", "Reader LED color"],
+    answer: [2],
+    multi: false
+  },
+  {
+    id: 8,
+    q: "A maglock must unlock during a fire alarm and remain locked when powered normally. Which relay wiring supports this?",
+    options: ["Use NO (normally open)", "Use NC (normally closed)", "Use a momentary relay", "Parallel two relays"],
+    answer: [1],
+    multi: false
+  },
+  {
+    id: 9,
+    q: "Which signal types require surge protection? (Select all that apply)",
+    options: ["Reader data (Wiegand)", "RS-485", "Reader power", "Ethernet", "18/2 power loop"],
+    answer: [0, 1, 2, 3],
+    multi: true
+  },
+  {
+    id: 10,
+    q: "The door contact shows closed, but logs show forced door every time the lock engages. What's the likely cause?",
+    options: ["Contact miswired to REX input", "Lock mounted on push side", "Contact set as supervised with no resistor", "Controller relay is stuck"],
+    answer: [2],
+    multi: false
+  },
+  {
+    id: 11,
+    q: "A strike won’t lock after install. REX and credential events are working. First step?",
+    options: ["Check for reversed polarity or missing common wire", "Replace the strike", "Change REX settings", "Factory reset the controller"],
+    answer: [0],
+    multi: false
+  },
+  {
+    id: 12,
+    q: "Maglock remains engaged after swipe and REX. Correct troubleshooting sequence?",
+    options: ["Confirm REX signal reaches panel", "Verify relay output is active", "Confirm lock wiring to NC contact", "Test voltage at terminals"],
+    answer: [0, 1, 2, 3],
+    multi: true
+  },
+  {
+    id: 13,
+    q: "On drawings, you see a reader, a 'DC' symbol, and an unlabeled shape via dashed line to equipment room. What's the third symbol?",
+    options: ["REX", "Door contact", "Power transfer hinge", "Control panel or interface module"],
+    answer: [3],
+    multi: false
+  },
+  {
+    id: 14,
+    q: "Which Division covers electronic security systems like access control and CCTV?",
+    options: ["Division 26", "Division 25", "Division 28", "Division 10"],
+    answer: [2],
+    multi: false
+  },
+  {
+    id: 15,
+    q: "Where should you look for door hardware prep (e.g., strikes, power transfer)?",
+    options: ["Division 28", "Division 10", "Division 26", "Division 08"],
+    answer: [3],
+    multi: false
+  },
+  {
+    id: 16,
+    q: "A strike won’t lock after install. Badge and REX events log correctly. What is the first logical step?",
+    options: ["Check for reversed polarity or missing common wire", "Replace the strike", "Reboot the access panel", "Adjust unlock schedule"],
+    answer: [0],
+    multi: false
+  },
+  {
+    id: 17,
+    q: "Maglock doesn’t release after badge swipe or REX. Correct troubleshooting order?",
+    options: ["Confirm REX signal", "Verify relay output", "Confirm NC wiring", "Measure voltage"],
+    answer: [0, 1, 2, 3],
+    multi: true
+  },
+  {
+    id: 18,
+    q: "On floor plans, you see reader, strike, contact — no REX or motion. What do you do?",
+    options: ["Install REX anyway", "Remove the strike", "Submit RFI for egress hardware", "Note change in redlines"],
+    answer: [2],
+    multi: false
+  },
+  {
+    id: 19,
+    q: "Setting up an IDS with glass-break, motion, door contacts. Which issue delays commissioning?",
+    options: ["Motion mounted 7 ft", "All sensors on unsupervised 2-wire loop", "Recessed contacts", "30 ft FOV"],
+    answer: [1],
+    multi: false
+  },
+  {
+    id: 20,
+    q: "Reviewing door schedule: strike by Security, Division 08 shows maglock. Next step?",
+    options: ["Install maglock", "Install strike", "Submit RFI", "Tech decides"],
+    answer: [2],
+    multi: false
+  },
+  {
+    id: 21,
+    q: "Installing reader/lock near HVAC motors. Best cable type for interference?",
+    options: ["22/6 solid riser", "CAT5e UTP", "Shielded twisted pair (STP)", "Plenum-rated 18/2"],
+    answer: [2],
+    multi: false
+  },
+  {
+    id: 22,
+    q: "Mercury controller reboots twice daily. Power reads 12.3VDC. Most likely cause?",
+    options: ["Duplicate IP/MAC", "Overloaded output", "Faulty strike", "Incorrect LED setting"],
+    answer: [0],
+    multi: false
+  },
+  {
+    id: 23,
+    q: "Technician misses wiring 'FAI' input from fire alarm. What function is bypassed?",
+    options: ["Lock status monitoring", "Battery test", "Fire alarm door release", "Unlock scheduling"],
+    answer: [2],
+    multi: false
+  },
+  {
+    id: 24,
+    q: "On plans: reader, strike, contact. No REX or motion. What action do you take?",
+    options: ["Install REX", "Remove strike", "Submit RFI for egress device", "Note on redlines"],
+    answer: [2],
+    multi: false
+  },
+  {
+    id: 25,
+    q: "Power/network pulled to MP1502 but no RS-485 to MR52s. What happens at startup?",
+    options: ["Main fails to boot", "MR52s stay offline", "Relays engage but doors fail", "Readers show solid red but work"],
+    answer: [1],
+    multi: false
+  }
+];
+
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    let timeLeft = 1800;
+    const timerDisplay = document.getElementById("timer");
+    const timerInterval = setInterval(() => {
+      const minutes = Math.floor(timeLeft / 60);
+      const seconds = timeLeft % 60;
+      timerDisplay.textContent = `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+      if (timeLeft-- <= 0) {
+        clearInterval(timerInterval);
+        document.getElementById("quizForm").submit();
+      }
+    }, 1000);
+
+    const container = document.getElementById("questionContainer");
+    shuffle(questions).forEach((q, index) => {
+      const qDiv = document.createElement("div");
+      qDiv.classList.add("question");
+      qDiv.innerHTML = `<h3>Q${index + 1}: ${q.q}</h3>`;
+      const opts = q.options.map((opt, i) => {
+        const inputType = q.multi ? "checkbox" : "radio";
+        const name = q.multi ? `q${q.id}_${i}` : `q${q.id}`;
+        return `<label><input type='${inputType}' name='${name}' value='${i}' /> ${opt}</label>`;
+      }).join("");
+      qDiv.innerHTML += `<div class='options'>${opts}</div>`;
+      container.appendChild(qDiv);
+    });
+
+    document.getElementById("quizForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      clearInterval(timerInterval);
+      const formData = new FormData(e.target);
+      const name = formData.get("candidateName");
+      const email = formData.get("candidateEmail");
+      const phone = formData.get("candidatePhone");
+      const answers = {};
+
+      questions.forEach(q => {
+        answers[q.id] = q.multi
+          ? q.options.map((_, i) => formData.get(`q${q.id}_${i}`) !== null)
+          : formData.get(`q${q.id}`);
+      });
+
+      let score = 0;
+      questions.forEach(q => {
+        const userAnswer = answers[q.id];
+        if (q.multi) {
+          const correct = q.answer.map(i => true);
+          const match = JSON.stringify(userAnswer) === JSON.stringify(correct);
+          if (match) score++;
+        } else {
+          if (parseInt(userAnswer) === q.answer[0]) score++;
+        }
+      });
+
+      alert(`Thank you, ${name}. Your score is ${score}/${questions.length}`);
+
+      const payload = {
+        candidate_name: name,
+        candidate_email: email,
+        candidate_phone: phone,
+        score: `${score}/${questions.length}`,
+        submitted_answers: JSON.stringify(answers, null, 2),
+        timestamp: new Date().toLocaleString()
+      };
+
+      emailjs.send("service_vwr5l2a", "template_30b7p95", payload)
+        .then(() => console.log("Email sent successfully"))
+        .catch(err => console.error("Email send error:", err));
+    });
   </script>
 </body>
 </html>
