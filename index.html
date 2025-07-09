@@ -290,12 +290,16 @@
   candidate_email: email,
   candidate_phone: phone,
   timestamp: new Date().toLocaleString(),
-  score: `${score}/${questions.length}`,
+  score: score,
+  total: questions.length,
   submitted_answers: JSON.stringify(answers, null, 2)
 };
 
       emailjs.send("service_vwr5l2a", "template_g7kolp4", payload)
-        .then(() => alert("✅ Your quiz was submitted and emailed successfully."))
+        .then((res) => {
+          console.log("✅ Email sent:", res.status, res.text);
+          alert("✅ Your quiz was submitted and emailed successfully.");
+        })
         .catch(err => {
           console.error("❌ Email send error:", err);
           alert("⚠️ Your quiz was recorded, but the email did not send. Please notify your supervisor.");
@@ -304,4 +308,3 @@
   </script>
 </body>
 </html>
-
