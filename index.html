@@ -286,13 +286,13 @@
       alert(`Thank you, ${name}. Your score is ${score}/${questions.length}`);
 
       const payload = {
-        candidate_name: name,
-        candidate_email: email,
-        candidate_phone: phone,
-        score: `${score}/${questions.length}`,
-        submitted_answers: JSON.stringify(answers, null, 2),
-        timestamp: new Date().toLocaleString()
-      };
+  from_name: name,
+  from_email: email,
+  from_phone: phone,
+  quiz_score: `${score}/${questions.length}`,
+  quiz_answers: JSON.stringify(answers, null, 2),
+  quiz_time: new Date().toLocaleString()
+};
 
       emailjs.send("service_vwr5l2a", "template_30b7p95", payload)
         .then(() => console.log("Email sent successfully"))
