@@ -285,13 +285,13 @@
 
       alert(`Thank you, ${name}. Your score is ${score}/${questions.length}`);
 
-      const payload = {
-  from_name: name,
-  from_email: email,
-  from_phone: phone,
-  quiz_score: `${score}/${questions.length}`,
-  quiz_answers: JSON.stringify(answers, null, 2),
-  quiz_time: new Date().toLocaleString()
+       const payload = {
+  candidate_name: name,
+  candidate_email: email,
+  candidate_phone: phone,
+  timestamp: new Date().toLocaleString(),
+  score: `${score}/${questions.length}`,
+  submitted_answers: JSON.stringify(answers, null, 2)
 };
 
       emailjs.send("service_vwr5l2a", "template_g7kolp4", payload)
