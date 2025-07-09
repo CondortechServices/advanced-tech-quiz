@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Advanced Technician Quiz</title>
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 20px; }
+    h1, h2 { text-align: center; }
+    .branding { text-align: center; margin-bottom: 20px; }
+    .branding img { width: 150px; }
+    .branding h2 { margin: 10px 0 5px; }
+    .branding p { margin: 0; color: #333; font-size: 14px; }
+    .question { margin-bottom: 20px; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.05); }
+    .options label { display: block; margin-bottom: 8px; cursor: pointer; }
+    .submit-btn { display: block; width: 100%; padding: 12px; background: #007BFF; color: white; border: none; font-size: 16px; border-radius: 5px; cursor: pointer; }
+    .submit-btn:hover { background: #0056b3; }
+    .timer { text-align: center; font-size: 20px; font-weight: bold; color: #d9534f; margin-bottom: 20px; }
+    input[type="text"] { width: 100%; padding: 10px; margin-bottom: 15px; }
+  </style>
+</head>
+<body oncontextmenu="return false;" oncopy="return false;" oncut="return false;" onpaste="return false;">
+  <div class="branding">
+    <img src="logo.png" alt="Condortech Services Logo">
+    <h2>Condortech Services, Inc.</h2>
+    <p>Security Systems Integration | Government & Commercial Solutions</p>
+    <p>4515 Daly Drive, Suite AB, Chantilly, VA 20151</p>
+    <p>Phone: (703) 916-9200 | Web: www.condortech.com</p>
+    <p>DCJS #11-1917</p>
+  </div>
+  <h1>Advanced Technician Quiz</h1>
+  <div class="timer" id="timer">30:00</div>
+  <form id="quizForm">
+    <input type="text" id="candidateName" name="candidateName" placeholder="Enter your full name" required />
+    <input type="text" id="candidateEmail" name="candidateEmail" placeholder="Enter your email address" required />
+    <input type="text" id="candidatePhone" name="candidatePhone" placeholder="Enter your phone number" required />
+
+    <div id="questionContainer"></div>
+
+    <button type="submit" class="submit-btn">Submit Quiz</button>
+  </form>
+
+  <script>
+    // JavaScript from the canvas HTML will be inserted here
+  </script>
+</body>
+</html>
