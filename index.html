@@ -42,10 +42,10 @@
   </form>
 
   <script>
-    window.onload = () => {
-  emailjs.init("Wjk8d6ZaoJAS2Phr9");
-};
-
+  window.onload = () => {
+    emailjs.init("Wjk8d6ZaoJAS2Phr9");
+  };
+    
 
     const questions = [
   {
@@ -288,15 +288,47 @@
 
       alert(`Thank you, ${name}. Your score is ${score}/${questions.length}`);
 
+            const categoryMap = {
+        "Access Control": [1, 2, 4, 5, 6, 11, 16, 20],
+        "Cabling & Power": [7, 9, 21],
+        "Fire & Life Safety": [8, 12, 23],
+        "Mercury Controllers": [1, 2, 3, 22, 25],
+        "Construction & Drawings": [13, 14, 15, 18, 24],
+        "Intrusion Detection (IDS)": [10, 17, 19],
+        "Wireless & Signal Integrity": [7, 21]
+      };
+
+      const categoryScores = {};
+      for (const [category, qids] of Object.entries(categoryMap)) {
+        const total = qids.length;
+        let correct = 0;
+        qids.forEach(qid => {
+          const q = questions.find(q => q.id === qid);
+          const userAnswer = answers[qid];
+          if (!q) return;
+          if (q.multi) {
+            const correctArray = q.answer.map(i => true);
+            if (JSON.stringify(userAnswer) === JSON.stringify(correctArray)) correct++;
+          } else {
+            if (parseInt(userAnswer) === q.answer[0]) correct++;
+          }
+        });
+        const percentage = (correct / total) * 100;
+        let level = "Needs Training";
+        if (percentage >= 85) level = "Proficient";
+        else if (percentage >= 60) level = "Developing";
+        categoryScores[category] = `${correct}/${total} correct (${level})`;
+      }
+
       const payload = {
-  candidate_name: name,
-  candidate_email: email,
-  candidate_phone: phone,
-  timestamp: new Date().toLocaleString(),
-  score: score,
-  total: questions.length,
-  submitted_answers: JSON.stringify(answers, null, 2)
-};
+        candidate_name: name,
+        candidate_email: email,
+        candidate_phone: phone,
+        timestamp: new Date().toLocaleString(),
+        score: score,
+        total: questions.length,
+        category_proficiency: JSON.stringify(categoryScores, null, 2)
+      };
 
       emailjs.send("service_vwr5l2a", "template_g7kolp4", payload)
         .then((res) => {
