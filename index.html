@@ -327,8 +327,7 @@
   score: score,
   total: questions.length,
   timestamp: new Date().toLocaleString(),
-  summary: Object.entries(categoryScores).map(([k, v]) => `${k}: ${v}`).join('
-')
+  summary: Object.entries(categoryScores).map(([k, v]) => `${k}: ${v}`).join('\n')
 };
 
       emailjs.send("service_vwr5l2a", "template_g7kolp4", payload)
@@ -344,3 +343,4 @@
   </script>
 </body>
 </html>
+
