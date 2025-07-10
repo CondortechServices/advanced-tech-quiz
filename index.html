@@ -321,14 +321,15 @@
       }
 
       const payload = {
-        candidate_name: name,
-        candidate_email: email,
-        candidate_phone: phone,
-        timestamp: new Date().toLocaleString(),
-        score: score,
-        total: questions.length,
-        category_proficiency: JSON.stringify(categoryScores, null, 2)
-      };
+  candidate_name: name,
+  candidate_email: email,
+  candidate_phone: phone,
+  score: score,
+  total: questions.length,
+  timestamp: new Date().toLocaleString(),
+  summary: Object.entries(categoryScores).map(([k, v]) => `${k}: ${v}`).join('
+')
+};
 
       emailjs.send("service_vwr5l2a", "template_g7kolp4", payload)
         .then((res) => {
